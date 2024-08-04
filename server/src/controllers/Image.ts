@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { uploadFile } from "../utils/fileUpload";
+const { PrismaClient } = require('@prisma/client')
 
+const prisma = new PrismaClient()
 
 export const addImage = async (req : Request, res : Response) => {
     try {
@@ -22,10 +24,17 @@ export const addImage = async (req : Request, res : Response) => {
         try {
             const upload = await uploadFile(image.tempFilePath)
             console.log(upload , "upload");
+            await prisma.image.create({
+                data : {
+                    imageUrl : upload.secure_url
+                }
+            })
             return res.status(200).json({
                 message : "Image uploaded Successfully !",
                 imageUrl : upload.secure_url
             })
+
+         
             
         } catch (e) {
             console.log(e ,"unalbe error");
