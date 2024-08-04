@@ -32,7 +32,6 @@ export const addImage = async (req : Request, res : Response) => {
             
         }
     } catch (e) {
-        console.log(e , "error");
-        
+        console.log(e , "error");   
     }
 }
