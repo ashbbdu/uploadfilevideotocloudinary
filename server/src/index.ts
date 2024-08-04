@@ -1,11 +1,13 @@
 import express, { Request, Response }  from "express";
 import imageRoutes from "./routes/Image"
 import fileUpload from "express-fileupload"
+import cors from "cors"
 var bodyParser = require("body-parser");
 
 
 
 const app = express();
+app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
