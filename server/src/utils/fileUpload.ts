@@ -11,7 +11,10 @@ console.log("reached Here");
 
   const uploadResult = await cloudinary.uploader
     .upload(image,  
-      {resource_type: "image", public_id: "cutepics"});
+      {resource_type: "auto", public_id: "cutepics"});  
+      // resource_type: "video"
+      // resource_type: "image"
+      // resource_type: "auto"
     
       console.log(uploadResult , "upload result");
       return uploadResult;

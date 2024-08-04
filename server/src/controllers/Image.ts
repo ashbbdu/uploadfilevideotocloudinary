@@ -7,9 +7,20 @@ export const addImage = async (req : Request, res : Response) => {
         // @ts-ignore
         // const image = req.files.image;
         const { image } = req.files;
-        const {firstName} = req.body;
-        console.log(firstName  , "firstName");
+        console.log("image" , image)
+        const format = image.name.split(".")[1];
+        console.log(format , "format");
         
+        // const {firstName} = req.body;
+        // console.log(firstName  , "firstName"); //dont know why firstName is undefined
+        const supportedTypes = ["jpg", "jpeg", "png"];
+        supportedTypes.map(resp => {
+            if(resp !== format) {
+                return res.status(400).json({
+                    message : "Invalid Image Format !"
+                })
+            }
+        })
         try {
             const upload = await uploadFile(image.tempFilePath)
             console.log(upload , "upload");
